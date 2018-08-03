@@ -36,4 +36,6 @@ setup(
         'dev': ['mypy==0.600', 'pylint==1.8.4', 'yapf==0.20.2', 'tox>=3.0.0'],
         'test': ['tox>=3.0.0']
     },
-    py_modules=['gsutilwrap'])
+    py_modules=['gsutilwrap'],
+    package_data={"gsutilwrap": ["py.typed"]},
+)
