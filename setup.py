@@ -17,10 +17,10 @@ with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='gsutilwrap',
-    version='1.1.0',
+    version='1.1.1',
     description='wraps gsutil, a command-line interface to Google Cloud Storage.',
     long_description=long_description,
-    url='https://bitbucket.org/parqueryopen/gsutilwrap',
+    url='https://github.com/Parquery/gsutilwrap',
     author='Marko Ristin and Adam Radomski',
     author_email='marko@parquery.com',
     classifiers=[
