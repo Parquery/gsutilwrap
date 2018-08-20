@@ -1,3 +1,8 @@
+1.1.2
+=====
+* Made ``copy_many_to_one`` and ``copy_many_to_many`` use a ``Sequence`` 
+  for covariant and immutable argument types
+
 1.1.1
 =====
 * Moved to github.com
