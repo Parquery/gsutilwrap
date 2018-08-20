@@ -17,7 +17,7 @@ with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='gsutilwrap',
-    version='1.1.1',
+    version='1.1.2',
     description='wraps gsutil, a command-line interface to Google Cloud Storage.',
     long_description=long_description,
     url='https://github.com/Parquery/gsutilwrap',
