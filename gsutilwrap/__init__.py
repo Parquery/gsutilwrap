@@ -11,7 +11,7 @@ import re
 import shlex
 import subprocess
 import urllib.parse
-from typing import List, Tuple, Dict, Optional, Union, cast  # pylint: disable=unused-import
+from typing import List, Tuple, Dict, Optional, Union, cast, Sequence  # pylint: disable=unused-import
 
 
 def ls(pattern: str, dont_recurse: bool = False) -> List[str]:  # pylint: disable=invalid-name
@@ -206,7 +206,7 @@ def copy(pattern: Union[str, pathlib.Path],
                 " ".join([shlex.quote(part) for part in cmd]), err))
 
 
-def copy_many_to_one(patterns: List[Union[str, pathlib.Path]],
+def copy_many_to_one(patterns: Sequence[Union[str, pathlib.Path]],
                      target: Union[str, pathlib.Path],
                      quiet: bool = False,
                      multithreaded: bool = False,
@@ -347,7 +347,7 @@ def _group_patterns_by_target(
     return by_target, ungrouped
 
 
-def copy_many_to_many(patterns_targets: List[Tuple[Union[str, pathlib.Path], Union[str, pathlib.Path]]],
+def copy_many_to_many(patterns_targets: Sequence[Tuple[Union[str, pathlib.Path], Union[str, pathlib.Path]]],
                       quiet: bool = False,
                       multithreaded: bool = False,
                       recursive: bool = False,
