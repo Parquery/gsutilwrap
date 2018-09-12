@@ -38,7 +38,7 @@ def ls(pattern: str, dont_recurse: bool = False) -> List[str]:  # pylint: disabl
     if proc.returncode == 0:
         return [line.strip() for line in out.split('\n') if line.strip() != '']
 
-    raise RuntimeError("gsutil failed: command was: {}\n, stderr:\n{}".format(" ".join(
+    raise RuntimeError("gsutil failed: command was: {!r}\n, stderr:\n{}".format(" ".join(
         [shlex.quote(part) for part in cmd]), err))
 
 
@@ -104,7 +104,7 @@ def long_ls(pattern: str, dont_recurse: bool = False) -> List[Entry]:
         return []
 
     if proc.returncode != 0:
-        raise RuntimeError("gsutil failed: command was: {}\n, stderr:\n{}".format(" ".join(
+        raise RuntimeError("gsutil failed: command was: {!r}\n, stderr:\n{}".format(" ".join(
             [shlex.quote(part) for part in cmd]), err))
 
     entries = []  # type: List[Entry]
@@ -198,11 +198,11 @@ def copy(pattern: Union[str, pathlib.Path],
     _, err = proc.communicate()
 
     if proc.returncode != 0:
-        if err.strip() == "CommandException: No URLs matched: {}".format(pattern):
+        if err.strip() == "CommandException: No URLs matched: {!r}".format(pattern):
             raise FileNotFoundError("Copy to {!r} failed since no file matched the pattern: {!r}".format(
                 target_str, pattern_str))
         else:
-            raise RuntimeError("gsutil failed: command was:\n{}\nstderr:\n{}".format(
+            raise RuntimeError("gsutil failed: command was:\n{!r}\nstderr:\n{}".format(
                 " ".join([shlex.quote(part) for part in cmd]), err))
 
 
@@ -289,10 +289,10 @@ def copy_many_to_one(patterns: Sequence[Union[str, pathlib.Path]],
 
     if proc.returncode != 0:
         if err.strip().startswith("CommandException: No URLs matched:"):
-            raise FileNotFoundError("Copy to {!r} failed since no file matched the pattern: {}".format(
+            raise FileNotFoundError("Copy to {!r} failed since no file matched the pattern: {!r}".format(
                 target_str, err.strip()))
         else:
-            raise RuntimeError("gsutil failed: command was:\n{}\nstderr:\n{}".format(
+            raise RuntimeError("gsutil failed: command was:\n{!r}\nstderr:\n{}".format(
                 " ".join([shlex.quote(part) for part in cmd]), err))
 
 
@@ -545,7 +545,7 @@ def write_bytes(url: str, data: bytes, quiet: bool = False) -> None:
     proc.communicate(input=data)
 
     if proc.returncode != 0:
-        raise RuntimeError("Failed to write to the object: {}".format(url))
+        raise RuntimeError("Failed to write to the object: {!r}".format(url))
 
 
 class Stat:
