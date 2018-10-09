@@ -179,7 +179,7 @@ class LiveTestGsutilwrap(unittest.TestCase):
 
                 self.assertListEqual([
                     '{}/file_0.txt'.format(base_url), '{}/file_1.txt'.format(base_url),
-                    '{}/file_3.txt'.format(base_url), '{}/file_4.txt'.format(base_url)
+                    '{}/file_2.txt'.format(base_url), '{}/file_3.txt'.format(base_url), '{}/file_4.txt'.format(base_url)
                 ], gsutilwrap.ls(base_url))
 
             finally:
