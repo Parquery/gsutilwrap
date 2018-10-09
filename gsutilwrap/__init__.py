@@ -36,7 +36,20 @@ def ls(pattern: str, dont_recurse: bool = False) -> List[str]:  # pylint: disabl
         return []
 
     if proc.returncode == 0:
-        return [line.strip() for line in out.split('\n') if line.strip() != '']
+        lines = []  # type: List[str]
+        for line in out.split('\n'):
+            line = line.strip()
+
+            # empty line
+            if line == '':
+                continue
+
+            # subdirectory matching resolved wildcard *
+            if line.endswith('/:'):
+                continue
+
+            lines.append(line)
+        return lines
 
     raise RuntimeError("gsutil failed: command was: {!r}\n, stderr:\n{}".format(" ".join(
         [shlex.quote(part) for part in cmd]), err))

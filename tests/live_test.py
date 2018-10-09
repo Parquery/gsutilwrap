@@ -101,6 +101,24 @@ class LiveTestGsutilwrap(unittest.TestCase):
             if len(gsutilwrap.ls(pattern=base_url)) > 0:
                 gsutilwrap.remove(pattern=base_url, quiet=True, multithreaded=True, recursive=True)
 
+    def test_ls_with_asterisk(self) -> None:
+        quiet = False
+
+        base_url = "{}/{}".format(TEST_GSUTILWRAP_URL_PREFIX, uuid.uuid4())
+
+        urls = ['{}/d1/one.txt'.format(base_url), '{}/d2/two.txt'.format(base_url)]
+        try:
+            for url in urls:
+                gsutilwrap.write_text(url=url, text="some dummy content", quiet=quiet)
+
+            self.assertEqual(2, len(gsutilwrap.ls(pattern='{}/d*'.format(base_url))))
+
+            listed_urls = gsutilwrap.ls(pattern='{}/d*'.format(base_url))
+            self.assertListEqual(urls, listed_urls)
+        finally:
+            if len(gsutilwrap.ls(pattern=base_url)) > 0:
+                gsutilwrap.remove(pattern=base_url, quiet=True, multithreaded=True, recursive=True)
+
     def test_write_read_text(self) -> None:
         quiet = True
 
